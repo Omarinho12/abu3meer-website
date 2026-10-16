@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - agent/production-backend
     paths:
       - site/**
       - .github/workflows/pages.yml
@@ -21,6 +20,8 @@ concurrency:
 
 jobs:
   deploy:
+    # The app/backend repository stays private. Publish only the website mirror.
+    if: github.repository == 'Omarinho12/abu3meer-website'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
